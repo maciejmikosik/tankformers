@@ -1,5 +1,7 @@
 package com.tankformers;
 
+import static com.tankformers.Game.newGameBoard;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tankformers.model.Board;
 
 public class Tankformers implements ApplicationListener {
   private OrthographicCamera camera;
@@ -16,8 +19,13 @@ public class Tankformers implements ApplicationListener {
   private Texture texture;
   private Sprite sprite;
 
+  @SuppressWarnings("unused")
+  private Board board;
+
   @Override
   public void create() {
+    board = newGameBoard();
+
     float w = Gdx.graphics.getWidth();
     float h = Gdx.graphics.getHeight();
 
