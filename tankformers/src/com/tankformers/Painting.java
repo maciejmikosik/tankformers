@@ -9,12 +9,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tankformers.model.Tank;
 
 public class Painting {
-  private static Texture tankTexture;
-  private static Sprite tankSprite;
+  private static Texture tankGreenTexture, tankOrangeTexture;
+  private static Sprite tankGreenSprite, tankOrangeSprite;
 
   static {
-    tankTexture = tankTexture("data/tank_green_64.png");
-    tankSprite = tankSprite(tankTexture);
+    tankGreenTexture = tankTexture("data/tank_green_64.png");
+    tankGreenSprite = tankSprite(tankGreenTexture);
+    tankOrangeTexture = tankTexture("data/tank_orange_64.png");
+    tankOrangeSprite = tankSprite(tankOrangeTexture);
   }
 
   private static Sprite tankSprite(Texture texture) {
@@ -32,13 +34,21 @@ public class Painting {
   }
 
   public static void dispose() {
-    tankTexture.dispose();
+    tankGreenTexture.dispose();
+    tankOrangeTexture.dispose();
   }
 
-  public static void draw(Tank tank, SpriteBatch batch) {
-    tankSprite.setRotation(tank.direction);
-    tankSprite.setPosition(tank.position.x, tank.position.y);
-    tankSprite.draw(batch);
+  public static void drawTankFirst(Tank tank, SpriteBatch batch) {
+    draw(tank, batch, tankGreenSprite);
   }
 
+  public static void drawTankSecond(Tank tank, SpriteBatch batch) {
+    draw(tank, batch, tankOrangeSprite);
+  }
+
+  public static void draw(Tank tank, SpriteBatch batch, Sprite sprite) {
+    sprite.setRotation(tank.direction);
+    sprite.setPosition(tank.position.x, tank.position.y);
+    sprite.draw(batch);
+  }
 }
