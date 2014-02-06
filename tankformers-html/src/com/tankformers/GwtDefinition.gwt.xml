@@ -4,5 +4,5 @@
 	<inherits name='com.badlogic.gdx.backends.gdx_backends_gwt' />
 	<inherits name='Tankformers' />
 	<entry-point class='com.tankformers.client.GwtLauncher' />
-	<set-configuration-property name="gdx.assetpath" value="../tankformers-android/assets" />
+	<set-configuration-property name="gdx.assetpath" value="../tankformers/src/" />
 </module>
