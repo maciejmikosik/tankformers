@@ -62,8 +62,8 @@ public class Tankformers implements ApplicationListener {
 
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
-    Painting.draw(board.tankA, batch);
-    Painting.draw(board.tankB, batch);
+    Painting.drawTankFirst(board.tankA, batch);
+    Painting.drawTankSecond(board.tankB, batch);
     batch.end();
   }
 
