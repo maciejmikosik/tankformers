@@ -1,0 +1,6 @@
+.settings/com.google.gwt.eclipse.core.prefs
+gwt-unitCache/
+war/WEB-INF/classes/
+war/WEB-INF/deploy/
+war/assets/
+war/com.tankformers.GwtDefinition/
