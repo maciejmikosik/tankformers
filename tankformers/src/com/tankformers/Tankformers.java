@@ -36,6 +36,9 @@ public class Tankformers implements ApplicationListener {
         if (Gdx.input.isKeyPressed(Keys.UP)) {
           board.tankA.drive(1);
         }
+        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+          board.tankA.drive(-0.5f);
+        }
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
           board.tankA.turn(1);
         }
