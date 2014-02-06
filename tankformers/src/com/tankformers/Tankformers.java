@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Timer.Task;
 import com.tankformers.model.Board;
 
 public class Tankformers implements ApplicationListener {
+  private static final float tick = 1f / 30f;
   private OrthographicCamera camera;
   private SpriteBatch batch;
 
@@ -37,19 +38,19 @@ public class Tankformers implements ApplicationListener {
       @Override
       public void run() {
         if (Gdx.input.isKeyPressed(Keys.UP)) {
-          board.tankA.drive(1);
+          board.tankA.drive(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-          board.tankA.drive(-0.5f);
+          board.tankA.drive(tick / 2f);
         }
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-          board.tankA.turn(1);
+          board.tankA.turn(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-          board.tankA.turn(-1);
+          board.tankA.turn(-tick);
         }
       }
-    }, 0, 1 / 30.0f);
+    }, 0, tick);
   }
 
   @Override
