@@ -28,6 +28,7 @@ public class Painting {
 
   public static void draw(Tank tank, SpriteBatch batch) {
     sprite.setRotation(tank.direction);
+    sprite.setPosition(tank.position.x, tank.position.y);
     sprite.draw(batch);
   }
 
