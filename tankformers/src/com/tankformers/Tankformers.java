@@ -37,17 +37,30 @@ public class Tankformers implements ApplicationListener {
     Timer.schedule(new Task() {
       @Override
       public void run() {
-        if (Gdx.input.isKeyPressed(Keys.UP)) {
+        if (Gdx.input.isKeyPressed(Keys.W)) {
           board.tankA.drive(tick);
         }
-        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-          board.tankA.drive(tick / 2f);
+        if (Gdx.input.isKeyPressed(Keys.S)) {
+          board.tankA.drive(-tick / 2f);
         }
-        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(Keys.A)) {
           board.tankA.turn(tick);
         }
-        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+        if (Gdx.input.isKeyPressed(Keys.D)) {
           board.tankA.turn(-tick);
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.O)) {
+          board.tankB.drive(tick);
+        }
+        if (Gdx.input.isKeyPressed(Keys.L)) {
+          board.tankB.drive(-tick / 2f);
+        }
+        if (Gdx.input.isKeyPressed(Keys.K)) {
+          board.tankB.turn(tick);
+        }
+        if (Gdx.input.isKeyPressed(Keys.SEMICOLON)) {
+          board.tankB.turn(-tick);
         }
       }
     }, 0, tick);
