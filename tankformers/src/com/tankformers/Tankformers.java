@@ -1,6 +1,7 @@
 package com.tankformers;
 
 import static com.tankformers.Game.newGameBoard;
+import static com.tankformers.Painter.newPainter;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -17,6 +18,7 @@ public class Tankformers implements ApplicationListener {
   private SpriteBatch batch;
 
   private Board board;
+  private Painter painter;
 
   @Override
   public void create() {
@@ -26,6 +28,7 @@ public class Tankformers implements ApplicationListener {
     batch = new SpriteBatch();
 
     board = newGameBoard();
+    painter = newPainter();
     scheduleClock();
   }
 
@@ -52,7 +55,7 @@ public class Tankformers implements ApplicationListener {
   @Override
   public void dispose() {
     batch.dispose();
-    Painting.dispose();
+    painter.dispose();
   }
 
   @Override
@@ -62,8 +65,8 @@ public class Tankformers implements ApplicationListener {
 
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
-    Painting.drawTankFirst(board.tankA, batch);
-    Painting.drawTankSecond(board.tankB, batch);
+    painter.drawTankFirst(board.tankA, batch);
+    painter.drawTankSecond(board.tankB, batch);
     batch.end();
   }
 
