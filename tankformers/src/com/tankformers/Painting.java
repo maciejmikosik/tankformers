@@ -13,7 +13,7 @@ public class Painting {
   private static Sprite sprite;
 
   static {
-    texture = new Texture(Gdx.files.internal("data/tank_64.png"));
+    texture = new Texture(Gdx.files.internal("data/tank_green_64.png"));
     texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
     sprite = new Sprite(new TextureRegion(texture, 0, 0, 64, 64));
