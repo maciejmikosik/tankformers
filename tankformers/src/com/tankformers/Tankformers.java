@@ -4,6 +4,7 @@ import static com.tankformers.Game.newGameBoard;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,13 +33,17 @@ public class Tankformers implements ApplicationListener {
     Timer.schedule(new Task() {
       @Override
       public void run() {
-        board.tankA.direction += 1;
-        board.tankA.drive(1f / 60f);
-
-        board.tankB.direction += 1;
-        board.tankB.drive(1 / 30f);
+        if (Gdx.input.isKeyPressed(Keys.UP)) {
+          board.tankA.drive(1);
+        }
+        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+          board.tankA.turn(1);
+        }
+        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+          board.tankA.turn(-1);
+        }
       }
-    }, 2, 1 / 30.0f);
+    }, 0, 1 / 30.0f);
   }
 
   @Override
