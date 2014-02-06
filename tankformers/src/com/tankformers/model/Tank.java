@@ -4,10 +4,10 @@ public class Tank {
   public Point position;
   public float direction;
 
-  private static final float speed = 1f;
+  private static final float speed = 0.1f;
 
-  public static void drive(Tank tank, float time) {
-    tank.position.x += Math.sin(tank.direction) * time * speed;
-    tank.position.y += Math.cos(tank.direction) * time * speed;
+  public void drive(float time) {
+    position.x += Math.cos(direction / 360 * 2 * Math.PI) * time * speed;
+    position.y += Math.sin(direction / 360 * 2 * Math.PI) * time * speed;
   }
 }

@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.tankformers.model.Board;
 
 public class Tankformers implements ApplicationListener {
@@ -23,6 +25,20 @@ public class Tankformers implements ApplicationListener {
     batch = new SpriteBatch();
 
     board = newGameBoard();
+    scheduleClock();
+  }
+
+  private void scheduleClock() {
+    Timer.schedule(new Task() {
+      @Override
+      public void run() {
+        board.tankA.direction += 1;
+        board.tankA.drive(1f / 60f);
+
+        board.tankB.direction += 1;
+        board.tankB.drive(1 / 30f);
+      }
+    }, 2, 1 / 30.0f);
   }
 
   @Override
