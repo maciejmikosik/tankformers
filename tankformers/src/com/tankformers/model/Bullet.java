@@ -11,6 +11,7 @@ public class Bullet {
   public float age;
 
   public void fly(float time) {
+    age += time;
     position = add(position, vectorPolar(direction, time * speed));
   }
 }

@@ -1,5 +1,6 @@
 package com.tankformers;
 
+import static com.tankformers.Collider.solveCollision;
 import static com.tankformers.Game.newGameBoard;
 import static com.tankformers.Painter.newPainter;
 
@@ -103,6 +104,8 @@ public class Tankformers implements ApplicationListener {
         }
         board.tankA.tick(tick);
         board.tankB.tick(tick);
+
+        solveCollision(board);
       }
     }, 0, tick);
   }
