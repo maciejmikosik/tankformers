@@ -6,6 +6,7 @@ import static com.tankformers.Painter.newPainter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,6 +22,8 @@ public class Tankformers implements ApplicationListener {
 
   private Board board;
   private Painter painter;
+  private Sound fire01Sound;
+  private Sound fire02Sound;
 
   @Override
   public void create() {
@@ -28,6 +31,8 @@ public class Tankformers implements ApplicationListener {
     float h = Gdx.graphics.getHeight();
     camera = new OrthographicCamera(1, h / w);
     batch = new SpriteBatch();
+    fire01Sound = Gdx.audio.newSound(Gdx.files.internal("data/fire01.wav"));
+    fire02Sound = Gdx.audio.newSound(Gdx.files.internal("data/fire02.wav"));
 
     board = newGameBoard();
     painter = newPainter();
@@ -63,6 +68,13 @@ public class Tankformers implements ApplicationListener {
         if (Gdx.input.isKeyPressed(Keys.SEMICOLON)) {
           board.tankB.turn(-tick);
         }
+        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+          fire01Sound.play();
+        }
+        if (Gdx.input.isKeyPressed(Keys.TAB)) {
+          fire02Sound.play();
+        }
+
       }
     }, 0, tick);
   }
