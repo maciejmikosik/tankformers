@@ -30,4 +30,19 @@ public class Calculations {
   public static float distance(Vector vectorA, Vector vectorB) {
     return length(add(vectorA, minus(vectorB)));
   }
+
+  public static Vector multiply(float value, Vector vector) {
+    Vector result = new Vector();
+    result.x = value * vector.x;
+    result.y = value * vector.y;
+    return result;
+  }
+
+  public static Vector unit(Vector vector) {
+    Vector unit = new Vector();
+    float length = length(vector);
+    unit.x = vector.x / length;
+    unit.y = vector.y / length;
+    return unit;
+  }
 }

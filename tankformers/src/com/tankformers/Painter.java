@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.tankformers.math.Vector;
 import com.tankformers.model.Bullet;
 import com.tankformers.model.Tank;
 import com.tankformers.model.Wall;
@@ -67,34 +66,10 @@ public class Painter {
   }
 
   public void drawWall(Wall wall, SpriteBatch batch) {
-    Vector vector = new Vector();
-    vector.x = wall.second.x - wall.first.x;
-    vector.y = wall.second.y - wall.first.y;
-    float angle = angle(vector);
-    float length = length(vector);
-    float numberOfBricks = length / (Wall.size * 0.95f);
-    Vector unit = new Vector();
-    unit.x = vector.x / numberOfBricks;
-    unit.y = vector.y / numberOfBricks;
-
     wallSprite.setSize(Wall.size, Wall.size);
     wallSprite.setOrigin(wallSprite.getWidth() / 2, wallSprite.getHeight() / 2);
-    wallSprite.setRotation(angle);
-
-    for (int i = 0; i < (int) numberOfBricks + 1; i++) {
-      wallSprite.setPosition(wall.first.x + i * unit.x, wall.first.y + i * unit.y);
-      draw(wallSprite, batch);
-    }
-    wallSprite.setPosition(wall.second.x, wall.second.y);
+    wallSprite.setPosition(wall.position.x, wall.position.y);
     draw(wallSprite, batch);
-  }
-
-  private static float angle(Vector vector) {
-    return (float) (Math.atan2(vector.y, vector.x) / 2 / (float) Math.PI * 360f);
-  }
-
-  private static float length(Vector vector) {
-    return (float) Math.sqrt(vector.x * vector.x + vector.y * vector.y);
   }
 
   public void drawBullet(Bullet bullet, SpriteBatch batch) {
