@@ -85,9 +85,13 @@ public class Tankformers implements ApplicationListener {
         }
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
           fire02Sound.play();
+          Bullet bullet = board.tankB.fire();
+          board.bullets.add(bullet);
         }
         if (Gdx.input.isKeyPressed(Keys.TAB)) {
           fire01Sound.play();
+          Bullet bullet = board.tankA.fire();
+          board.bullets.add(bullet);
         }
 
         for (Bullet bullet : board.bullets) {
