@@ -54,34 +54,34 @@ public class Tankformers implements ApplicationListener {
       public void run() {
         if (Gdx.input.isKeyPressed(Keys.W)) {
           engine01Music.play();
-          board.tankA.drive(tick);
+          board.tankA.driveForward(tick);
         } else {
           engine01Music.pause();
         }
         if (Gdx.input.isKeyPressed(Keys.S)) {
-          board.tankA.drive(-tick / 2f);
+          board.tankA.driveBackward(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.A)) {
-          board.tankA.turn(tick);
+          board.tankA.turnLeft(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.D)) {
-          board.tankA.turn(-tick);
+          board.tankA.turnRight(tick);
         }
 
         if (Gdx.input.isKeyPressed(Keys.O)) {
           engine02Music.play();
-          board.tankB.drive(tick);
+          board.tankB.driveForward(tick);
         } else {
           engine02Music.pause();
         }
         if (Gdx.input.isKeyPressed(Keys.L)) {
-          board.tankB.drive(-tick / 2f);
+          board.tankB.driveBackward(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.K)) {
-          board.tankB.turn(tick);
+          board.tankB.turnLeft(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.SEMICOLON)) {
-          board.tankB.turn(-tick);
+          board.tankB.turnRight(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
           fire02Sound.play();

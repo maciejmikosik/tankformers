@@ -4,19 +4,29 @@ import static com.tankformers.model.Calculations.add;
 import static com.tankformers.model.Calculations.vectorPolar;
 
 public class Tank {
-  public static final float size = 0.05f;
   public Vector position = new Vector();
   public float direction;
 
-  private static float turnSpeed = 60f;
-  private static final float speed = 0.1f;
+  public static final float size = 0.05f;
 
-  public void drive(float time) {
-    position = add(position, vectorPolar(direction, time * speed));
+  private static final float turnSpeed = 60f;
+  private static final float forwardSpeed = 0.1f;
+  private static final float backwardSpeed = forwardSpeed * 0.5f;
+
+  public void driveForward(float time) {
+    position = add(position, vectorPolar(direction, time * forwardSpeed));
   }
 
-  public void turn(float delta) {
-    direction += delta * turnSpeed;
+  public void driveBackward(float time) {
+    position = add(position, vectorPolar(direction, time * -backwardSpeed));
+  }
+
+  public void turnLeft(float time) {
+    direction += turnSpeed * time;
+  }
+
+  public void turnRight(float time) {
+    direction += -turnSpeed * time;
   }
 
   public Bullet fire() {
