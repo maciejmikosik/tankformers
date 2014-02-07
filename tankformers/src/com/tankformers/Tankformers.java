@@ -89,6 +89,9 @@ public class Tankformers implements ApplicationListener {
           fire01Sound.play();
         }
 
+        for (Bullet bullet : board.bullets) {
+          bullet.fly(tick);
+        }
       }
     }, 0, tick);
   }
