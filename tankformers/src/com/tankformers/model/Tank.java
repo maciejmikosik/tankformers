@@ -21,8 +21,8 @@ public class Tank {
     Bullet bullet = new Bullet();
     bullet.age = 0f;
     bullet.direction = direction;
-    bullet.position.x = position.x;
-    bullet.position.y = position.y;
+    bullet.position.x = (float) (position.x + Math.cos(direction / 360 * 2 * Math.PI) * (size / 2));
+    bullet.position.y = (float) (position.y + Math.sin(direction / 360 * 2 * Math.PI) * (size / 2));
     return bullet;
   }
 }
