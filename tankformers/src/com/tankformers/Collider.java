@@ -1,12 +1,12 @@
 package com.tankformers;
 
-import static com.tankformers.model.Calculations.distance;
+import static com.tankformers.math.Calculations.distance;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tankformers.model.Ground;
 import com.tankformers.model.Bullet;
+import com.tankformers.model.Ground;
 import com.tankformers.model.Tank;
 
 public class Collider {

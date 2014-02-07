@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tankformers.math.Vector;
 import com.tankformers.model.Bullet;
 import com.tankformers.model.Tank;
-import com.tankformers.model.Vector;
 import com.tankformers.model.Wall;
 
 public class Painter {

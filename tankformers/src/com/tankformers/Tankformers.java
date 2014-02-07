@@ -1,8 +1,8 @@
 package com.tankformers;
 
 import static com.tankformers.Collider.solveCollision;
-import static com.tankformers.Setup.setupGround;
 import static com.tankformers.Painter.newPainter;
+import static com.tankformers.Setup.setupGround;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -14,8 +14,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import com.tankformers.model.Ground;
 import com.tankformers.model.Bullet;
+import com.tankformers.model.Ground;
 import com.tankformers.model.Tank;
 import com.tankformers.model.Wall;
 
