@@ -14,11 +14,26 @@ import com.tankformers.math.Vector;
 import com.tankformers.model.Bullet;
 import com.tankformers.model.Ground;
 import com.tankformers.model.Tank;
+import com.tankformers.model.Wall;
 
 public class Collider {
   public static void solveCollision(Ground ground) {
     solveTankWithBullet(ground);
     solveTankWithTank(ground);
+    solveTankWithWall(ground);
+  }
+
+  private static void solveTankWithWall(Ground ground) {
+    for (Wall wall : ground.walls) {
+      for (Tank tank : ground.tanks) {
+        Vector diff = add(wall.position, minus(tank.position));
+        float space = length(diff) - 0.4f * Tank.size - 0.4f * Wall.size;
+        if (space < 0f) {
+          Vector correction = multiply(space, unit(diff));
+          tank.position = add(tank.position, correction);
+        }
+      }
+    }
   }
 
   private static void solveTankWithTank(Ground ground) {
