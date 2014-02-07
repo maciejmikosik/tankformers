@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.tankformers.model.Point;
 import com.tankformers.model.Tank;
+import com.tankformers.model.Vector;
 import com.tankformers.model.Wall;
 
 public class Painter {
@@ -67,13 +67,13 @@ public class Painter {
   }
 
   public void drawWall(Wall wall, SpriteBatch batch) {
-    Point vector = new Point();
+    Vector vector = new Vector();
     vector.x = wall.second.x - wall.first.x;
     vector.y = wall.second.y - wall.first.y;
     float angle = angle(vector);
     float length = length(vector);
     float numberOfBricks = length / (Wall.size * 0.95f);
-    Point unit = new Point();
+    Vector unit = new Vector();
     unit.x = vector.x / numberOfBricks;
     unit.y = vector.y / numberOfBricks;
 
@@ -89,11 +89,11 @@ public class Painter {
     wallSprite.draw(batch);
   }
 
-  private static float angle(Point vector) {
+  private static float angle(Vector vector) {
     return (float) (Math.atan2(vector.y, vector.x) / 2 / (float) Math.PI * 360f);
   }
 
-  private static float length(Point vector) {
+  private static float length(Vector vector) {
     return (float) Math.sqrt(vector.x * vector.x + vector.y * vector.y);
   }
 }
