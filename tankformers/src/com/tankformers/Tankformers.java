@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.tankformers.model.Board;
+import com.tankformers.model.Wall;
 
 public class Tankformers implements ApplicationListener {
   private static final float tick = 1f / 30f;
@@ -81,6 +82,9 @@ public class Tankformers implements ApplicationListener {
     batch.begin();
     painter.drawTankFirst(board.tankA, batch);
     painter.drawTankSecond(board.tankB, batch);
+    for (Wall wall : board.walls) {
+      painter.drawWall(wall, batch);
+    }
     batch.end();
   }
 
