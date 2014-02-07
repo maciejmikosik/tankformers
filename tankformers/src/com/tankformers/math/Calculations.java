@@ -1,4 +1,4 @@
-package com.tankformers.model;
+package com.tankformers.math;
 
 public class Calculations {
   public static Vector vectorPolar(float angleInDegrees, float length) {

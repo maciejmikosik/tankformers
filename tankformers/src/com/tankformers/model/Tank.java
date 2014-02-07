@@ -1,7 +1,9 @@
 package com.tankformers.model;
 
-import static com.tankformers.model.Calculations.add;
-import static com.tankformers.model.Calculations.vectorPolar;
+import static com.tankformers.math.Calculations.add;
+import static com.tankformers.math.Calculations.vectorPolar;
+
+import com.tankformers.math.Vector;
 
 public class Tank {
   public Vector position = new Vector();

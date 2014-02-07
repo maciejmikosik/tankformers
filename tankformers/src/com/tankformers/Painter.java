@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tankformers.math.Vector;
 import com.tankformers.model.Bullet;
 import com.tankformers.model.Tank;
-import com.tankformers.model.Vector;
 import com.tankformers.model.Wall;
 
 public class Painter {
@@ -55,15 +55,10 @@ public class Painter {
     }
   }
 
-  public void drawTankFirst(Tank tank, SpriteBatch batch) {
-    draw(tank, batch, tankGreenSprite);
-  }
-
-  public void drawTankSecond(Tank tank, SpriteBatch batch) {
-    draw(tank, batch, tankOrangeSprite);
-  }
-
-  public static void draw(Tank tank, SpriteBatch batch, Sprite sprite) {
+  public void drawTank(Tank tank, int i, SpriteBatch batch) {
+    Sprite sprite = i == 0
+        ? tankGreenSprite
+        : tankOrangeSprite;
     sprite.setSize(Tank.size, Tank.size);
     sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
     sprite.setRotation(tank.direction);
