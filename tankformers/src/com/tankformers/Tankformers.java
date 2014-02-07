@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.tankformers.model.Board;
+import com.tankformers.model.Bullet;
 import com.tankformers.model.Wall;
 
 public class Tankformers implements ApplicationListener {
@@ -113,6 +114,9 @@ public class Tankformers implements ApplicationListener {
     painter.drawTankSecond(board.tankB, batch);
     for (Wall wall : board.walls) {
       painter.drawWall(wall, batch);
+    }
+    for (Bullet bullet : board.bullets) {
+      painter.drawBullet(bullet, batch);
     }
     batch.end();
   }

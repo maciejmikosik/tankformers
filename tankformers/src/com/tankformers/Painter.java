@@ -9,13 +9,14 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tankformers.model.Bullet;
 import com.tankformers.model.Tank;
 import com.tankformers.model.Vector;
 import com.tankformers.model.Wall;
 
 public class Painter {
   private final List<Texture> disposables = new ArrayList<Texture>();
-  private Sprite tankGreenSprite, tankOrangeSprite, wallSprite;
+  private Sprite tankGreenSprite, tankOrangeSprite, wallSprite, bulletSprite;
 
   private Painter() {}
 
@@ -32,9 +33,13 @@ public class Painter {
     region = new TextureRegion(linearTexture("data/wall_16.png"), 0, 0, 16, 16);
     painter.wallSprite = new Sprite(region);
 
+    region = new TextureRegion(linearTexture("data/bullet_32.png"), 0, 0, 32, 32);
+    painter.bulletSprite = new Sprite(region);
+
     painter.disposables.add(painter.tankGreenSprite.getTexture());
     painter.disposables.add(painter.tankOrangeSprite.getTexture());
     painter.disposables.add(painter.wallSprite.getTexture());
+    painter.disposables.add(painter.bulletSprite.getTexture());
     return painter;
   }
 
@@ -95,5 +100,13 @@ public class Painter {
 
   private static float length(Vector vector) {
     return (float) Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+  }
+
+  public void drawBullet(Bullet bullet, SpriteBatch batch) {
+    bulletSprite.setSize(Bullet.size, Bullet.size);
+    bulletSprite.setOrigin(bulletSprite.getWidth() / 2, bulletSprite.getHeight() / 2);
+    bulletSprite.setRotation(bullet.direction);
+    bulletSprite.setPosition(bullet.position.x, bullet.position.y);
+    bulletSprite.draw(batch);
   }
 }
