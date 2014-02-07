@@ -8,15 +8,17 @@ public class Game {
   public static Board newGameBoard() {
     Board board = new Board();
 
-    board.tankA = new Tank();
-    board.tankA.position.x = 0.1f;
-    board.tankA.position.y = 0.1f;
-    board.tankA.direction = 127;
+    Tank tank = new Tank();
+    tank.position.x = 0.1f;
+    tank.position.y = 0.1f;
+    tank.direction = 127;
+    board.tanks.add(tank);
 
-    board.tankB = new Tank();
-    board.tankB.position.x = -0.3f;
-    board.tankB.position.y = -0.3f;
-    board.tankB.direction = 290;
+    tank = new Tank();
+    tank.position.x = -0.3f;
+    tank.position.y = -0.3f;
+    tank.direction = 290;
+    board.tanks.add(tank);
 
     Wall wall = new Wall();
     wall.first.x = -0.2f;

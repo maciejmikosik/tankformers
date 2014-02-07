@@ -13,7 +13,8 @@ public class Collider {
   public static void solveCollision(Board board) {
     List<Bullet> hits = new ArrayList<Bullet>();
     for (Bullet bullet : board.bullets) {
-      boolean areColliding = areColliding(bullet, board.tankA) || areColliding(bullet, board.tankB);
+      boolean areColliding = areColliding(bullet, board.tanks.get(0))
+          || areColliding(bullet, board.tanks.get(1));
       if (areColliding) {
         hits.add(bullet);
       }

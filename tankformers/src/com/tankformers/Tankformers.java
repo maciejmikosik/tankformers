@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.tankformers.model.Board;
 import com.tankformers.model.Bullet;
+import com.tankformers.model.Tank;
 import com.tankformers.model.Wall;
 
 public class Tankformers implements ApplicationListener {
@@ -55,46 +56,46 @@ public class Tankformers implements ApplicationListener {
       public void run() {
         if (Gdx.input.isKeyPressed(Keys.W)) {
           engine01Music.play();
-          board.tankA.driveForward(tick);
+          board.tanks.get(0).driveForward(tick);
         } else {
           engine01Music.pause();
         }
         if (Gdx.input.isKeyPressed(Keys.S)) {
-          board.tankA.driveBackward(tick);
+          board.tanks.get(0).driveBackward(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.A)) {
-          board.tankA.turnLeft(tick);
+          board.tanks.get(0).turnLeft(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.D)) {
-          board.tankA.turnRight(tick);
+          board.tanks.get(0).turnRight(tick);
         }
 
         if (Gdx.input.isKeyPressed(Keys.O)) {
           engine02Music.play();
-          board.tankB.driveForward(tick);
+          board.tanks.get(1).driveForward(tick);
         } else {
           engine02Music.pause();
         }
         if (Gdx.input.isKeyPressed(Keys.L)) {
-          board.tankB.driveBackward(tick);
+          board.tanks.get(1).driveBackward(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.K)) {
-          board.tankB.turnLeft(tick);
+          board.tanks.get(1).turnLeft(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.SEMICOLON)) {
-          board.tankB.turnRight(tick);
+          board.tanks.get(1).turnRight(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-          if (board.tankB.isReloaded()) {
+          if (board.tanks.get(1).isReloaded()) {
             fire02Sound.play();
-            Bullet bullet = board.tankB.fire();
+            Bullet bullet = board.tanks.get(1).fire();
             board.bullets.add(bullet);
           }
         }
         if (Gdx.input.isKeyPressed(Keys.TAB)) {
-          if (board.tankA.isReloaded()) {
+          if (board.tanks.get(0).isReloaded()) {
             fire01Sound.play();
-            Bullet bullet = board.tankA.fire();
+            Bullet bullet = board.tanks.get(0).fire();
             board.bullets.add(bullet);
           }
         }
@@ -102,8 +103,9 @@ public class Tankformers implements ApplicationListener {
         for (Bullet bullet : board.bullets) {
           bullet.fly(tick);
         }
-        board.tankA.tick(tick);
-        board.tankB.tick(tick);
+        for (Tank tank : board.tanks) {
+          tank.tick(tick);
+        }
 
         solveCollision(board);
       }
@@ -123,8 +125,10 @@ public class Tankformers implements ApplicationListener {
 
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
-    painter.drawTankFirst(board.tankA, batch);
-    painter.drawTankSecond(board.tankB, batch);
+    for (int i = 0; i < board.tanks.size(); i++) {
+      painter.drawTank(board.tanks.get(i), i, batch);
+    }
+
     for (Wall wall : board.walls) {
       painter.drawWall(wall, batch);
     }
