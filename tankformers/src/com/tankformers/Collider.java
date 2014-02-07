@@ -5,22 +5,22 @@ import static com.tankformers.model.Calculations.distance;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tankformers.model.Board;
+import com.tankformers.model.Ground;
 import com.tankformers.model.Bullet;
 import com.tankformers.model.Tank;
 
 public class Collider {
-  public static void solveCollision(Board board) {
+  public static void solveCollision(Ground ground) {
     List<Bullet> hits = new ArrayList<Bullet>();
-    for (Bullet bullet : board.bullets) {
-      boolean areColliding = areColliding(bullet, board.tanks.get(0))
-          || areColliding(bullet, board.tanks.get(1));
+    for (Bullet bullet : ground.bullets) {
+      boolean areColliding = areColliding(bullet, ground.tanks.get(0))
+          || areColliding(bullet, ground.tanks.get(1));
       if (areColliding) {
         hits.add(bullet);
       }
     }
     for (Bullet hit : hits) {
-      board.bullets.remove(hit);
+      ground.bullets.remove(hit);
     }
   }
 

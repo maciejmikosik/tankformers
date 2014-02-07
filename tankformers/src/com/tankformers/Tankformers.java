@@ -1,7 +1,7 @@
 package com.tankformers;
 
 import static com.tankformers.Collider.solveCollision;
-import static com.tankformers.Game.newGameBoard;
+import static com.tankformers.Setup.setupGround;
 import static com.tankformers.Painter.newPainter;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import com.tankformers.model.Board;
+import com.tankformers.model.Ground;
 import com.tankformers.model.Bullet;
 import com.tankformers.model.Tank;
 import com.tankformers.model.Wall;
@@ -24,7 +24,7 @@ public class Tankformers implements ApplicationListener {
   private OrthographicCamera camera;
   private SpriteBatch batch;
 
-  private Board board;
+  private Ground ground;
   private Painter painter;
   private Sound fire01Sound;
   private Sound fire02Sound;
@@ -45,7 +45,7 @@ public class Tankformers implements ApplicationListener {
     engine02Music = Gdx.audio.newMusic(Gdx.files.internal("data/engine02.wav"));
     engine02Music.setLooping(true);
 
-    board = newGameBoard();
+    ground = setupGround();
     painter = newPainter();
     scheduleClock();
   }
@@ -56,58 +56,58 @@ public class Tankformers implements ApplicationListener {
       public void run() {
         if (Gdx.input.isKeyPressed(Keys.W)) {
           engine01Music.play();
-          board.tanks.get(0).driveForward(tick);
+          ground.tanks.get(0).driveForward(tick);
         } else {
           engine01Music.pause();
         }
         if (Gdx.input.isKeyPressed(Keys.S)) {
-          board.tanks.get(0).driveBackward(tick);
+          ground.tanks.get(0).driveBackward(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.A)) {
-          board.tanks.get(0).turnLeft(tick);
+          ground.tanks.get(0).turnLeft(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.D)) {
-          board.tanks.get(0).turnRight(tick);
+          ground.tanks.get(0).turnRight(tick);
         }
 
         if (Gdx.input.isKeyPressed(Keys.O)) {
           engine02Music.play();
-          board.tanks.get(1).driveForward(tick);
+          ground.tanks.get(1).driveForward(tick);
         } else {
           engine02Music.pause();
         }
         if (Gdx.input.isKeyPressed(Keys.L)) {
-          board.tanks.get(1).driveBackward(tick);
+          ground.tanks.get(1).driveBackward(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.K)) {
-          board.tanks.get(1).turnLeft(tick);
+          ground.tanks.get(1).turnLeft(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.SEMICOLON)) {
-          board.tanks.get(1).turnRight(tick);
+          ground.tanks.get(1).turnRight(tick);
         }
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-          if (board.tanks.get(1).isReloaded()) {
+          if (ground.tanks.get(1).isReloaded()) {
             fire02Sound.play();
-            Bullet bullet = board.tanks.get(1).fire();
-            board.bullets.add(bullet);
+            Bullet bullet = ground.tanks.get(1).fire();
+            ground.bullets.add(bullet);
           }
         }
         if (Gdx.input.isKeyPressed(Keys.TAB)) {
-          if (board.tanks.get(0).isReloaded()) {
+          if (ground.tanks.get(0).isReloaded()) {
             fire01Sound.play();
-            Bullet bullet = board.tanks.get(0).fire();
-            board.bullets.add(bullet);
+            Bullet bullet = ground.tanks.get(0).fire();
+            ground.bullets.add(bullet);
           }
         }
 
-        for (Bullet bullet : board.bullets) {
+        for (Bullet bullet : ground.bullets) {
           bullet.fly(tick);
         }
-        for (Tank tank : board.tanks) {
+        for (Tank tank : ground.tanks) {
           tank.tick(tick);
         }
 
-        solveCollision(board);
+        solveCollision(ground);
       }
     }, 0, tick);
   }
@@ -125,14 +125,14 @@ public class Tankformers implements ApplicationListener {
 
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
-    for (int i = 0; i < board.tanks.size(); i++) {
-      painter.drawTank(board.tanks.get(i), i, batch);
+    for (int i = 0; i < ground.tanks.size(); i++) {
+      painter.drawTank(ground.tanks.get(i), i, batch);
     }
 
-    for (Wall wall : board.walls) {
+    for (Wall wall : ground.walls) {
       painter.drawWall(wall, batch);
     }
-    for (Bullet bullet : board.bullets) {
+    for (Bullet bullet : ground.bullets) {
       painter.drawBullet(bullet, batch);
     }
     batch.end();
