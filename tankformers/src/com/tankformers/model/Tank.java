@@ -1,6 +1,7 @@
 package com.tankformers.model;
 
 public class Tank {
+  public static final float size = 0.05f;
   public Point position;
   public float direction;
 
