@@ -6,6 +6,7 @@ import static com.tankformers.Painter.newPainter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -24,6 +25,8 @@ public class Tankformers implements ApplicationListener {
   private Painter painter;
   private Sound fire01Sound;
   private Sound fire02Sound;
+  private Music engine01Music;
+  private Music engine02Music;
 
   @Override
   public void create() {
@@ -31,8 +34,13 @@ public class Tankformers implements ApplicationListener {
     float h = Gdx.graphics.getHeight();
     camera = new OrthographicCamera(1, h / w);
     batch = new SpriteBatch();
+
     fire01Sound = Gdx.audio.newSound(Gdx.files.internal("data/fire01.wav"));
     fire02Sound = Gdx.audio.newSound(Gdx.files.internal("data/fire02.wav"));
+    engine01Music = Gdx.audio.newMusic(Gdx.files.internal("data/engine01.wav"));
+    engine01Music.setLooping(true);
+    engine02Music = Gdx.audio.newMusic(Gdx.files.internal("data/engine02.wav"));
+    engine02Music.setLooping(true);
 
     board = newGameBoard();
     painter = newPainter();
@@ -44,7 +52,10 @@ public class Tankformers implements ApplicationListener {
       @Override
       public void run() {
         if (Gdx.input.isKeyPressed(Keys.W)) {
+          engine01Music.play();
           board.tankA.drive(tick);
+        } else {
+          engine01Music.pause();
         }
         if (Gdx.input.isKeyPressed(Keys.S)) {
           board.tankA.drive(-tick / 2f);
@@ -57,7 +68,10 @@ public class Tankformers implements ApplicationListener {
         }
 
         if (Gdx.input.isKeyPressed(Keys.O)) {
+          engine02Music.play();
           board.tankB.drive(tick);
+        } else {
+          engine02Music.pause();
         }
         if (Gdx.input.isKeyPressed(Keys.L)) {
           board.tankB.drive(-tick / 2f);
@@ -69,10 +83,10 @@ public class Tankformers implements ApplicationListener {
           board.tankB.turn(-tick);
         }
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-          fire01Sound.play();
+          fire02Sound.play();
         }
         if (Gdx.input.isKeyPressed(Keys.TAB)) {
-          fire02Sound.play();
+          fire01Sound.play();
         }
 
       }
