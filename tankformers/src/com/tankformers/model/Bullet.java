@@ -1,5 +1,8 @@
 package com.tankformers.model;
 
+import static com.tankformers.model.Calculations.add;
+import static com.tankformers.model.Calculations.vectorPolar;
+
 public class Bullet {
   public static final float size = 0.025f;
   public static float speed = 0.15f;
@@ -8,7 +11,6 @@ public class Bullet {
   public float age;
 
   public void fly(float time) {
-    position.x += Math.cos(direction / 360 * 2 * Math.PI) * time * speed;
-    position.y += Math.sin(direction / 360 * 2 * Math.PI) * time * speed;
+    position = add(position, vectorPolar(direction, time * speed));
   }
 }

@@ -1,5 +1,8 @@
 package com.tankformers.model;
 
+import static com.tankformers.model.Calculations.add;
+import static com.tankformers.model.Calculations.vectorPolar;
+
 public class Tank {
   public static final float size = 0.05f;
   public Vector position = new Vector();
@@ -9,8 +12,7 @@ public class Tank {
   private static final float speed = 0.1f;
 
   public void drive(float time) {
-    position.x += Math.cos(direction / 360 * 2 * Math.PI) * time * speed;
-    position.y += Math.sin(direction / 360 * 2 * Math.PI) * time * speed;
+    position = add(position, vectorPolar(direction, time * speed));
   }
 
   public void turn(float delta) {
@@ -21,8 +23,7 @@ public class Tank {
     Bullet bullet = new Bullet();
     bullet.age = 0f;
     bullet.direction = direction;
-    bullet.position.x = (float) (position.x + Math.cos(direction / 360 * 2 * Math.PI) * (size / 2));
-    bullet.position.y = (float) (position.y + Math.sin(direction / 360 * 2 * Math.PI) * (size / 2));
+    bullet.position = add(position, vectorPolar(direction, size / 2));
     return bullet;
   }
 }
