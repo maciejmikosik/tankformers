@@ -1,3 +1,4 @@
+.gwt/.gwt-log
 .settings/com.google.gwt.eclipse.core.prefs
 gwt-unitCache/
 war/WEB-INF/classes/
