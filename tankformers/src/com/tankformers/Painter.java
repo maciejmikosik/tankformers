@@ -68,7 +68,7 @@ public class Painter {
     sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
     sprite.setRotation(tank.direction);
     sprite.setPosition(tank.position.x, tank.position.y);
-    sprite.draw(batch);
+    draw(sprite, batch);
   }
 
   public void drawWall(Wall wall, SpriteBatch batch) {
@@ -88,10 +88,10 @@ public class Painter {
 
     for (int i = 0; i < (int) numberOfBricks + 1; i++) {
       wallSprite.setPosition(wall.first.x + i * unit.x, wall.first.y + i * unit.y);
-      wallSprite.draw(batch);
+      draw(wallSprite, batch);
     }
     wallSprite.setPosition(wall.second.x, wall.second.y);
-    wallSprite.draw(batch);
+    draw(wallSprite, batch);
   }
 
   private static float angle(Vector vector) {
@@ -107,6 +107,11 @@ public class Painter {
     bulletSprite.setOrigin(bulletSprite.getWidth() / 2, bulletSprite.getHeight() / 2);
     bulletSprite.setRotation(bullet.direction);
     bulletSprite.setPosition(bullet.position.x, bullet.position.y);
-    bulletSprite.draw(batch);
+    draw(bulletSprite, batch);
+  }
+
+  private static void draw(Sprite sprite, SpriteBatch batch) {
+    sprite.translate(-sprite.getOriginX(), -sprite.getOriginY());
+    sprite.draw(batch);
   }
 }
