@@ -16,4 +16,13 @@ public class Tank {
   public void turn(float delta) {
     direction += delta * turnSpeed;
   }
+
+  public Bullet fire() {
+    Bullet bullet = new Bullet();
+    bullet.age = 0f;
+    bullet.direction = direction;
+    bullet.position.x = position.x;
+    bullet.position.y = position.y;
+    return bullet;
+  }
 }

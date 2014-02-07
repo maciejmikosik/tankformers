@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.tankformers.model.Board;
+import com.tankformers.model.Bullet;
 import com.tankformers.model.Wall;
 
 public class Tankformers implements ApplicationListener {
@@ -84,11 +85,18 @@ public class Tankformers implements ApplicationListener {
         }
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
           fire02Sound.play();
+          Bullet bullet = board.tankB.fire();
+          board.bullets.add(bullet);
         }
         if (Gdx.input.isKeyPressed(Keys.TAB)) {
           fire01Sound.play();
+          Bullet bullet = board.tankA.fire();
+          board.bullets.add(bullet);
         }
 
+        for (Bullet bullet : board.bullets) {
+          bullet.fly(tick);
+        }
       }
     }, 0, tick);
   }
@@ -110,6 +118,9 @@ public class Tankformers implements ApplicationListener {
     painter.drawTankSecond(board.tankB, batch);
     for (Wall wall : board.walls) {
       painter.drawWall(wall, batch);
+    }
+    for (Bullet bullet : board.bullets) {
+      painter.drawBullet(bullet, batch);
     }
     batch.end();
   }
