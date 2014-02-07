@@ -21,10 +21,8 @@ public class Setup {
     ground.tanks.add(tank);
 
     Wall wall = new Wall();
-    wall.first.x = -0.2f;
-    wall.first.y = 0.1f;
-    wall.second.x = 0.2f;
-    wall.second.y = -0.1f;
+    wall.position.x = -0.2f;
+    wall.position.y = 0.1f;
 
     ground.walls.add(wall);
     return ground;
