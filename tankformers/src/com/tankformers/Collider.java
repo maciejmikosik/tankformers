@@ -21,6 +21,25 @@ public class Collider {
     solveTankWithBullet(ground);
     solveTankWithTank(ground);
     solveTankWithWall(ground);
+    solveBulletWithWall(ground);
+  }
+
+  private static void solveBulletWithWall(Ground ground) {
+    List<Bullet> hitBullets = new ArrayList<Bullet>();
+    List<Wall> hitWalls = new ArrayList<Wall>();
+
+    for (Bullet bullet : ground.bullets) {
+      for (Wall wall : ground.walls) {
+        Vector diff = add(wall.position, minus(bullet.position));
+        float space = length(diff) - 0.4f * Bullet.size - 0.4f * Wall.size;
+        if (space < 0f) {
+          hitBullets.add(bullet);
+          hitWalls.add(wall);
+        }
+      }
+    }
+    ground.bullets.removeAll(hitBullets);
+    ground.walls.removeAll(hitWalls);
   }
 
   private static void solveTankWithWall(Ground ground) {
