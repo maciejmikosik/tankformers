@@ -48,8 +48,10 @@ public class Collider {
         Vector diff = add(wall.position, minus(tank.position));
         float space = length(diff) - 0.4f * Tank.size - 0.4f * Wall.size;
         if (space < 0f) {
+          float ratio = 0.8f;
           Vector correction = multiply(space, unit(diff));
-          tank.position = add(tank.position, correction);
+          tank.position = add(tank.position, multiply(ratio, correction));
+          wall.position = add(wall.position, multiply(1f - ratio, minus(correction)));
         }
       }
     }
