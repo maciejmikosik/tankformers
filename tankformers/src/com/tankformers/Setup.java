@@ -7,6 +7,7 @@ import static com.tankformers.math.Vector.vector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.tankformers.math.Vector;
 import com.tankformers.model.Ground;
@@ -32,8 +33,25 @@ public class Setup {
     ground.walls.addAll(walls(10, vector(-0.3f, 0.3f), 290));
     ground.walls.addAll(walls(20, vector(-0.1f, 0.15f), 280));
     ground.walls.addAll(walls(10, vector(0.1f, -0.1f), 0));
+    ground.walls.addAll(walls(10, vector(0.2f, -0.2f), 111));
+    ground.walls.addAll(walls(10, vector(-0.13f, 0.32f), 345));
+    ground.walls.addAll(walls(50, vector(-0.23f, -0.22f), 40));
 
+    ground.walls.addAll(borders());
+    ground.walls.addAll(randomWalls("seed".hashCode(), 300));
     return ground;
+  }
+
+  private static List<Wall> randomWalls(long seed, int number) {
+    Random random = new Random(seed);
+    List<Wall> walls = new ArrayList<Wall>();
+    for (int i = 0; i < number; i++) {
+      Wall wall = new Wall();
+      wall.position.x = random.nextFloat() - 0.5f;
+      wall.position.y = random.nextFloat() - 0.5f;
+      walls.add(wall);
+    }
+    return walls;
   }
 
   private static List<Wall> walls(int number, Vector position, float angle) {
@@ -44,6 +62,15 @@ public class Setup {
       wall.position = add(position, multiply(i, diff));
       walls.add(wall);
     }
+    return walls;
+  }
+
+  private static List<Wall> borders() {
+    List<Wall> walls = new ArrayList<Wall>();
+    walls.addAll(walls(35, vector(-0.45f, -0.35f), 90));
+    walls.addAll(walls(35, vector(0.45f, -0.35f), 90));
+    walls.addAll(walls(45, vector(-0.45f, -0.35f), 0));
+    walls.addAll(walls(46, vector(-0.45f, 0.35f), 0));
     return walls;
   }
 }
