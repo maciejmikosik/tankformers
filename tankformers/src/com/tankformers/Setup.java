@@ -30,14 +30,6 @@ public class Setup {
     tank.direction = 290;
     ground.tanks.add(tank);
 
-    ground.walls.addAll(walls(10, vector(-0.3f, 0.3f), 290));
-    ground.walls.addAll(walls(20, vector(-0.1f, 0.15f), 280));
-    ground.walls.addAll(walls(10, vector(0.1f, -0.1f), 0));
-    ground.walls.addAll(walls(10, vector(0.2f, -0.2f), 111));
-    ground.walls.addAll(walls(10, vector(-0.13f, 0.32f), 345));
-    ground.walls.addAll(walls(50, vector(-0.23f, -0.22f), 40));
-
-    ground.walls.addAll(borders());
     ground.walls.addAll(randomWalls("seed".hashCode(), 300));
     return ground;
   }

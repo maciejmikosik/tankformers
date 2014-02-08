@@ -22,6 +22,25 @@ public class Collider {
     solveTankWithTank(ground);
     solveTankWithWall(ground);
     solveBulletWithWall(ground);
+    solveWallWithWall(ground);
+  }
+
+  private static void solveWallWithWall(Ground ground) {
+    List<Wall> walls = ground.walls;
+    for (int i = 0; i < walls.size(); i++) {
+      for (int j = i + 1; j < walls.size(); j++) {
+        Wall wallA = walls.get(i);
+        Wall wallB = walls.get(j);
+        Vector vector = add(wallB.position, minus(wallA.position));
+
+        float space = length(vector) - 0.4f * Wall.size * 2;
+        if (space < 0f) {
+          Vector correction = multiply(0.5f * -space, unit(vector));
+          wallA.position = add(wallA.position, minus(correction));
+          wallB.position = add(wallB.position, correction);
+        }
+      }
+    }
   }
 
   private static void solveBulletWithWall(Ground ground) {
