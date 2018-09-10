@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+HERE=`dirname ${0}`
+cd "${HERE}/.."
+PROJECT=`pwd`
+
+######### clean destination #########
+
+DESTINATION="/tmp/tankformers_desktop"
+rm -rf ${DESTINATION}
+mkdir -p "${DESTINATION}"
+
+######### compile #########
+
+javac \
+  -sourcepath "${PROJECT}/tankformers-desktop/src" \
+  -sourcepath "${PROJECT}/tankformers/src" \
+  -classpath "${PROJECT}/tankformers-desktop/libs/gdx-backend-lwjgl.jar:${PROJECT}/tankformers/libs/gdx.jar" \
+  -d "${DESTINATION}" \
+  "${PROJECT}/tankformers-desktop/src/com/tankformers/Main.java"
+
+######### copy media #########
+
+cp \
+  -r \
+  "${PROJECT}/tankformers/src/data" \
+  "${DESTINATION}/data"
+
+######### launch #########
+
+java \
+  -classpath "${DESTINATION}:${PROJECT}/tankformers-desktop/libs/gdx-backend-lwjgl.jar:${PROJECT}/tankformers/libs/gdx.jar:${PROJECT}/tankformers-desktop/libs/gdx-natives.jar:${PROJECT}/tankformers-desktop/libs/gdx-backend-lwjgl-natives.jar" \
+  com.tankformers.Main
